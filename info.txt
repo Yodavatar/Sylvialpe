@@ -1,0 +1,6 @@
+--- RÉSULTATS DU POIDS TOTAL ---
+Bits : 4,938,292,881,368 bits
+Octets : 617,286,610,171 octets
+Mégaoctets (Mo) : 588,690.39 Mo
+Gigaoctets (Go) : 574.89 Go
+yodavatar@fedora:~/sylvialpe/src$ 

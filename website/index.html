@@ -6,7 +6,6 @@
     <link rel="icon" href="logo.png" type="image/png">
     <title>Sylvialpe</title>
     <style>
-        /* === VARIABLES & THÈME NATUREL === */
         :root {
             --bg-color: #f7f9f6; 
             --text-main: #2c3e2e;
@@ -321,11 +320,10 @@
 <body>
 
     <button id="langToggle" class="lang-switch">🇬🇧 English</button>
-
     <div class="container">
 
         <header style="display: flex; align-items: center; justify-content: center; gap: 20px;">
-            <img src="./lyon.jpg" alt="Icone Lyon" style="width: 100%; max-width: 200px;">
+            <img src="../data/lyon.jpg" alt="Icone Lyon" style="width: 100%; max-width: 200px;">
             <div>
                 <h1>Sylvialpe — Lyon</h1>
             <p class="subtitle" data-fr="Classification de la végétation par dalles de 500m × 500m." data-en="Vegetation classification using 500m × 500m tiles.">Classification de la végétation par dalles de 500m × 500m.</p>
@@ -347,6 +345,11 @@
                     <h4 data-fr="Dalles analysées" data-en="Tiles analyzed">Dalles traitées</h4>
                     <p id="count-dalles" style="font-size: 1.4rem; font-weight: bold; color: var(--accent-green);">-- / 2588</p>
                 </div>
+
+                <div class="legend-box" style="width: 220px;">
+                    <h4 data-fr="Données étudiées" data-en="Studied data">Données étudiées</h4>
+                    <p id="count-dalles" style="font-size: 1.4rem; font-weight: bold; color: var(--accent-green);">574.89 Go</p>
+                </div>
                 
                 <div class="legend-box" style="width: 220px;">
                     <h4 data-fr="Surface verte" data-en="Green surface">Surface verte</h4>
@@ -354,7 +357,7 @@
                 </div>
 
                 <div class="legend-box" style="width: 220px;">
-                    <h4 data-fr="Couverture totale" data-en="Total coverage">Couverture</h4>
+                    <h4 data-fr="Couverture totale" data-en="Total coverage">Couverture moyenne</h4>
                     <p id="pourcentage" style="font-size: 1.4rem; font-weight: bold; color: #2980b9;">-- %</p>
                 </div>
             </div>
@@ -366,8 +369,8 @@
             </p>
             
             <div class="slider-container">
-                <img src="./origin.jpg" alt="Vue Satellitaire" class="img-before">
-                <img src="./hybride.jpg" alt="Masque de végétation" class="img-after" id="img-after">
+                <img src="../data/origin.jpg" alt="Vue Satellitaire" class="img-before">
+                <img src="../data/hybride.jpg" alt="Masque de végétation" class="img-after" id="img-after">
                 <div class="slider-line" id="slider-line"></div>
                 <div class="slider-button" id="slider-button">↔</div>
                 <input type="range" min="0" max="100" value="50" class="slider-input" id="slider-input">

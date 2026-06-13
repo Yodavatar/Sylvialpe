@@ -35,10 +35,9 @@ def get_color(pourcentage):
         return "#46775A" # Vert foncé
 
 if __name__ == "__main__":
-    csv_path = "inventaire_canopee_lyon.csv" # Ajuste le chemin si besoin
+    csv_path = "data/inventaire_canopee_lyon.csv"
     df = pd.read_csv(csv_path)
 
-    # 2. Calcul des statistiques globales
     
     nb_analyzed = len(df)
     surface_verte_km2 = round(df["Surface Arborée (m2)"].sum() / 1000000, 2)
@@ -52,7 +51,7 @@ if __name__ == "__main__":
         "pourcentage": pourcentage_global
     }
 
-    with open("showdata/map/stats.json", "w", encoding="utf-8") as f:
+    with open("website/stats.json", "w", encoding="utf-8") as f:
         json.dump(stats, f)
     print("✅ stats.json mis à jour.")
 
@@ -69,11 +68,23 @@ if __name__ == "__main__":
         poly = [cc46_to_wgs84(x_min, y_min), cc46_to_wgs84(x_min, y_max), 
                 cc46_to_wgs84(x_max, y_max), cc46_to_wgs84(x_max, y_min)]
         
+        # Formatage des données pour un affichage propre
+        verdure_pct = round(row["Pourcentage Verdure (%)"], 2)
+        surface_m2 = round(row["Surface Arborée (m2)"], 2)
+        
+        # Construction du texte du popup (avec balises HTML pour la mise en forme)
+        texte_popup = f"""
+        <strong>Dalle :</strong> {row['Nom Dalle']}<br>
+        <strong>Verdure :</strong> {verdure_pct} %<br>
+        <strong>Surface arborée :</strong> {surface_m2:,} m²
+        """.replace(',', ' ') # Espace pour le séparateur des milliers
+        
         folium.Polygon(
             locations=[[lat, lon] for lat, lon in poly],
             fill=True, fill_color=get_color(row["Pourcentage Verdure (%)"]),
             fill_opacity=0.4, color=get_color(row["Pourcentage Verdure (%)"]),
-            weight=1.5, popup=f"Dalle : {row['Nom Dalle']}"
+            weight=1.5,
+            popup=folium.Popup(texte_popup, max_width=300)
         ).add_to(carte)
 
     # --- INJECTION DU BOUTON ET DE LA LÉGENDE INTERACTIVE ---
@@ -127,6 +138,6 @@ if __name__ == "__main__":
     carte.get_root().html.add_child(folium.Element(html_legende))
 
     # Sauvegarde de la carte
-    carte_output = "showdata/map/index.html"
+    carte_output = "website/map/index.html"
     carte.save(carte_output)
     print(f"🎉 Carte avec bouton générée ! Ouvre '{carte_output}' pour tester.")
